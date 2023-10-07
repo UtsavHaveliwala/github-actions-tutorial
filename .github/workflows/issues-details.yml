@@ -10,4 +10,4 @@ jobs:
         run: |
           echo "Issue Details:"
           echo "=============================================================================="
-          echo "${{ toJSON(github.action) }}"
+          echo "${{ toJSON(github.event) }}"
