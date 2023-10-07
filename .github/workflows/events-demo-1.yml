@@ -7,6 +7,22 @@ on:
     types:
       - opened
       - reopened
+    # Specifying the activity filters.
+    branches:
+      - main
+      # - 'dev-*'         ==> Covers all these branches: dev-new dev-updated
+      # - 'feat/**'       ==> Covers all these branches: feat/new feat/button feat/new/input
+
+  push:
+    # Specifying the activity filters.
+    branches:
+      - main
+      # - 'dev-*'         ==> Covers all these branches: dev-new dev-updated
+      # - 'feat/**'       ==> Covers all these branches: feat/new feat/button feat/new/input
+
+    paths-ignore:
+      # Don;t run workflow if there are any file changes to below path.
+      - ".github/workflows/*"
   workflow_dispatch:
 
 jobs:
