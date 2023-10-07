@@ -8,4 +8,6 @@ jobs:
       - name: Greet User
         run: echo "Hello User!!!"
       - name: Say Goodbye
-        run: echo "Good to see you, Good-bye!"
+        run: |
+            echo "Good to see you!" 
+            echo "Good-bye!!!"
