@@ -11,11 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3z
+
       - name: Install dependencies
         run: npm ci
+
       - name: Lint code
         run: npm run lint
+
       - name: Test code
         run: npm run test
 
@@ -25,10 +28,13 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v3
+
       - name: Install dependencies
         run: npm ci
+
       - name: Build website
         run: npm run build
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
@@ -43,7 +49,11 @@ jobs:
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v3
+        with:
+          name: dist-files
+
       - name: Output Current Directory Contents
         run: ls
+
       - name: Deploy
         run: echo "Deploying..."
