@@ -6,20 +6,26 @@ on:
     branches:
       - main
 
+# Environmetn variable made available to entire workflow (all jobs).
 env:
   WORKFLOW_ENV_VARIABLE: WORKFLOW_ENV_VARIABLE
 
 jobs:
   test:
+    # Environmetn variable made available to on current job.
     env:
       TEST_ENV_VARIABLE: TEST
+      USERNAME: ${{ secrets.USERNAME }}
+      PASSWORD: ${{ secrets.PASSWORD }}
     runs-on: ubuntu-latest
     steps:
       - name: Printing Environment Variable
         run: |
           echo "FROM TEST JOB:"
-          echo "Workflow: ${{ env.WORKFLOW_ENV_VARIABLE }}"    
+          echo "Workflow: ${{ env.WORKFLOW_ENV_VARIABLE }}"
           echo "Test Job: ${{ env.TEST_ENV_VARIABLE }}"
+          echo "Username: ${{ env.USERNAME }}"
+          echo "Password: ${{ env.PASSWORD }}"
 
   deploy:
     runs-on: ubuntu-latest
