@@ -49,6 +49,7 @@ jobs:
         run: npm run test
 
       - name: Upload test report
+        # Run this step only if any of previous step failed and outcome of run-tests in failure.
         if: failure() && steps.run-tests.outcome == 'failure'
         uses: actions/upload-artifact@v3
         with:
@@ -103,10 +104,11 @@ jobs:
 
   report:
     needs: [lint, deploy]
+    # Run only if any of the previous jobs failed.
     if: failure()
     runs-on: ubuntu-latest
     steps:
       - name: Output Report Info
         run: |
           echo "Something went wrong..."
-          echo "${{ github }}"
+          echo "${{ toJSON(github) }}"
