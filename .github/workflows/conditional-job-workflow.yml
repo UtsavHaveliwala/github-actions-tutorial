@@ -1,3 +1,4 @@
+# This workflow contains the conditional run of Jobs and Steps.
 name: Website Deployment
 
 on:
@@ -99,3 +100,13 @@ jobs:
 
       - name: Deploy
         run: echo "Deploying..."
+
+  report:
+    needs: [lint, deploy]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output Report Info
+        run: |
+          echo "Something went wrong..."
+          echo "${{ github }}"
