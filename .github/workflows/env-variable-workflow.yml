@@ -1,0 +1,31 @@
+# This workflow is to test environment variables in GHA workflow.
+name: Test Environment Variables
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  WORKFLOW_ENV_VARIABLE: WORKFLOW_ENV_VARIABLE
+
+jobs:
+  test:
+    env:
+      TEST_ENV_VARIABLE: TEST
+    runs-on: ubuntu-latest
+    steps:
+      - name: Printing Environment Variable
+        run: |
+          echo "FROM TEST JOB:"
+          echo "Workflow: ${{ env.WORKFLOW_ENV_VARIABLE }}"    
+          echo "Test Job: ${{ env.TEST_ENV_VARIABLE }}"
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Printing Environment Variable
+        run: |
+          echo "FROM DEPLOY JOB:"
+          echo "Workflow: ${{ env.WORKFLOW_ENV_VARIABLE }}"    
+          echo "Deploy Job: ${{ env.TEST_ENV_VARIABLE }}"
